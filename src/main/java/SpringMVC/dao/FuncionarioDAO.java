@@ -1,19 +1,19 @@
-package dao;
+package SpringMVC.dao;
 
-import model.Funcionario;
+import SpringMVC.model.Funcionario;
 
 import javax.sql.DataSource;
 import java.util.List;
 
 public interface FuncionarioDAO {
 
-    void salvar(Funcionario funcionario);
+    String salvar(Funcionario funcionario);
 
     List<Funcionario> listar();
 
     List<Funcionario> listarPorArea(int codArea);
 
-    void deletar(int ccodigo);
+    String deletar(int ccodigo) throws Exception;
 
     Funcionario buscarPorCodigo(int codigo);
 

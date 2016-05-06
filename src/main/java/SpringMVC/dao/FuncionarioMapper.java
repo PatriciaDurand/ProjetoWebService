@@ -1,9 +1,9 @@
-package repository;
+package SpringMVC.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Funcionario;
+import SpringMVC.model.Funcionario;
 import org.springframework.jdbc.core.RowMapper;
 
 public class FuncionarioMapper implements RowMapper<Funcionario> {

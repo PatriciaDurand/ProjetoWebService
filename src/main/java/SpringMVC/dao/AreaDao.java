@@ -1,6 +1,6 @@
-package dao;
+package SpringMVC.dao;
 
-import model.Area;
+import SpringMVC.model.Area;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -13,7 +13,7 @@ public interface AreaDao {
 
     String deletar(int codigo) throws Exception;
 
-    String deletarCascata(int codigo);
+    String deletarCascata(int codigo) throws Exception;
 
     Area buscarPorCodigo(int codigo);
 

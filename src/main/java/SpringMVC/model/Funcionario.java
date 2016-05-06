@@ -1,4 +1,4 @@
-package model;
+package SpringMVC.model;
 
 import com.sun.org.apache.bcel.internal.util.Objects;
 

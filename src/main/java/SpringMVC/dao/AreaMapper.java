@@ -1,9 +1,9 @@
-package repository;
+package SpringMVC.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Area;
+import SpringMVC.model.Area;
 import org.springframework.jdbc.core.RowMapper;
 
 public class AreaMapper implements RowMapper<Area> {

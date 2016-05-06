@@ -1,7 +1,6 @@
-package repository;
+package SpringMVC.dao;
 
-import dao.FuncionarioDAO;
-import model.Funcionario;
+import SpringMVC.model.Funcionario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +12,6 @@ import java.util.List;
 @Transactional
 public class FuncionarioDAOJDBC implements FuncionarioDAO {
 
-    //http://www.tutorialspoint.com/spring/spring_jdbc_example.htm
-
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
 
@@ -25,11 +22,12 @@ public class FuncionarioDAOJDBC implements FuncionarioDAO {
     }
 
     @Override
-    public void salvar(Funcionario funcionario) {
+    public String salvar(Funcionario funcionario) {
         String SQL = "INSERT INTO FUNCIONARIO (NOME, SALARIOBASE, AREA) VALUES (?, ?, ?)";
         jdbcTemplateObject.update(SQL, funcionario.getNome(), funcionario.getSalarioBase(), funcionario.getArea());
-
-        return;
+        return "Funcionario salvo com sucesso!\n Nome = " + funcionario.getNome() +
+                " Salário Base = " + funcionario.getSalarioBase() +
+                " Área = " + funcionario.getArea();
     }
 
     @Override
@@ -54,11 +52,17 @@ public class FuncionarioDAOJDBC implements FuncionarioDAO {
     }
 
     @Override
-    public void deletar(int codigo) {
-        String SQL = "DELETE FROM FUNCIONARIO WHERE ID = ?";
-        jdbcTemplateObject.update(SQL, codigo);
-        System.out.println("Funcionario deletado com sucesso!!\n ID = " + codigo);
-        return;
+    public String deletar(int codigo) throws Exception {
+        String funcionario = buscarPorCodigo(codigo).getNome();
+        try {
+            String SQL = "DELETE FROM FUNCIONARIO WHERE ID = ?";
+            jdbcTemplateObject.update(SQL, codigo);
+            System.out.println("Funcionario " + funcionario + " deletado com sucesso!!");
+            return "Funcionario " + funcionario + " deletado com sucesso!!";
+        } catch (Exception e){
+            System.out.println("Não foi possível deletar o funcionário " + funcionario + ".");
+            throw new Exception("Não foi possível deletar o funcionárop " + funcionario + ".");
+        }
     }
 
 }
