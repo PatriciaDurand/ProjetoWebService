@@ -44,7 +44,7 @@ public class FuncionarioController {
         return new ResponseEntity<List<Funcionario>>(new ArrayList<>(funcionarioDAO.listar()), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/deletarFuncionario/{codigo}", method=RequestMethod.GET)
+    @RequestMapping(value = "/deletaFuncionario/{codigo}", method=RequestMethod.GET)
     public String deletarFuncionario (@PathVariable("codigo") int codigo) throws Exception {
         funcionarioDAO.setDataSource(dataSource);
         try {

@@ -43,7 +43,7 @@ public class AreaController {
         return new ResponseEntity<List<Area>>(new ArrayList<>(areaDAO.listar()), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/deletarArea/{codigo}", method=RequestMethod.GET)
+    @RequestMapping(value = "/deletaArea/{codigo}", method=RequestMethod.GET)
     public String deletarArea (@PathVariable("codigo") int codigo) throws Exception {
         areaDAO.setDataSource(dataSource);
         try {
@@ -54,7 +54,7 @@ public class AreaController {
         return erro;
     }
 
-    @RequestMapping(value = "/deletarAreaCascata/{codigo}", method=RequestMethod.GET)
+    @RequestMapping(value = "/deletaAreaCascata/{codigo}", method=RequestMethod.GET)
     public String deletarAreaCascata(@PathVariable("codigo") int codigo) {
         areaDAO.setDataSource(dataSource);
         try {
