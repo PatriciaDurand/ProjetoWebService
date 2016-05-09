@@ -26,11 +26,11 @@ public class AreaDAOJDBC implements AreaDao {
     }
 
     @Override
-    public String salvar(Area area) {
+    public String salvar(String nome) {
         String SQL = "INSERT INTO AREA (NOME) VALUES (?)";
-        jdbcTemplateObject.update(SQL, area.getNome());
-        System.out.println("Área " + area.getNome() + " salva com sucesso!!");
-        return "Área " + area.getNome() + " salva com sucesso!!";
+        jdbcTemplateObject.update(SQL, nome);
+        System.out.println("Área " + nome + " salva com sucesso!!");
+        return "Área " + nome + " salva com sucesso!!";
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class AreaController {
 
-    private String erro = "";
+    private String mensagem = "";
 
     @Autowired
     AreaDao areaDAO;
@@ -25,16 +25,13 @@ public class AreaController {
     @Autowired
     DataSource dataSource;
 
-    //    @RequestMapping(value = "/adicionaArea", method = RequestMethod.POST)
-    @RequestMapping(value = "/adicionaArea")
-    public String adicionaFuncionario(Area area) {
-//        if (!area.getNome().equals("")) {
-//            areaDAO.setDataSource(dataSource);
-//            areaDAO.salvar(area);
-//            erro = "";
-//        }
-//        return "redirect:/cadastroArea";
-        return "OK";
+    @RequestMapping(value = "/adicionaArea/{nome}", method=RequestMethod.GET)
+    public String adicionaFuncionario(@PathVariable("nome") String nome) {
+        if (!nome.equals("")) {
+            areaDAO.setDataSource(dataSource);
+            mensagem = areaDAO.salvar(nome);
+        }
+        return mensagem;
     }
 
     @RequestMapping(value = "/listaArea", method=RequestMethod.GET)
@@ -47,22 +44,22 @@ public class AreaController {
     public String deletarArea (@PathVariable("codigo") int codigo) throws Exception {
         areaDAO.setDataSource(dataSource);
         try {
-            erro = areaDAO.deletar(codigo);
+            mensagem = areaDAO.deletar(codigo);
         } catch (Exception e) {
-            erro = e.getMessage();
+            mensagem = e.getMessage();
         }
-        return erro;
+        return mensagem;
     }
 
     @RequestMapping(value = "/deletaAreaCascata/{codigo}", method=RequestMethod.GET)
     public String deletarAreaCascata(@PathVariable("codigo") int codigo) {
         areaDAO.setDataSource(dataSource);
         try {
-            erro = areaDAO.deletarCascata(codigo);
+            mensagem = areaDAO.deletarCascata(codigo);
         } catch (Exception e) {
-            erro = e.getMessage();
+            mensagem = e.getMessage();
         }
-        return erro;
+        return mensagem;
     }
 
 }

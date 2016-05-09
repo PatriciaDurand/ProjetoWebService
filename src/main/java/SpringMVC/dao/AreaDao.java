@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AreaDao {
 
-    String salvar(Area area);
+    String salvar(String nome);
 
     List<Area> listar();
 

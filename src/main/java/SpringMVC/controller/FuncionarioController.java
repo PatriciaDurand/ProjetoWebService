@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class FuncionarioController {
 
-    private String erro = "";
+    private String mensagem = "";
 
     @Autowired
     private FuncionarioDAO funcionarioDAO;
@@ -27,15 +27,13 @@ public class FuncionarioController {
     @Autowired
     DataSource dataSource;
 
-//    @RequestMapping(value = "/adicionaFuncionario", method = RequestMethod.POST)
-    @RequestMapping(value = "/adicionaFuncionario")
-    public String adicionaFuncionario() {
-//        if (!funcionario.getNome().equals("") && funcionario.getSalarioBase() >= 0) {
-//            funcionarioDAO.setDataSource(dataSource);
-//            funcionarioDAO.salvar(funcionario);
-//        }
-//        return "redirect:/cadastroFuncionario";
-        return "OK";
+    @RequestMapping(value = "/adicionaFuncionario/{nome}/{salarioBase}/{area}", method=RequestMethod.GET)
+    public String adicionaFuncionario(@PathVariable("nome") String nome, @PathVariable("salarioBase") double salarioBase, @PathVariable("area") int area) {
+        if (!nome.equals("") && salarioBase >= 0) {
+            funcionarioDAO.setDataSource(dataSource);
+            mensagem = funcionarioDAO.salvar(new Funcionario(nome, salarioBase, area));
+        }
+        return mensagem;
     }
 
     @RequestMapping(value = "/listaFuncionario", method=RequestMethod.GET)
@@ -48,11 +46,11 @@ public class FuncionarioController {
     public String deletarFuncionario (@PathVariable("codigo") int codigo) throws Exception {
         funcionarioDAO.setDataSource(dataSource);
         try {
-            erro = funcionarioDAO.deletar(codigo);
+            mensagem = funcionarioDAO.deletar(codigo);
         } catch (Exception e) {
-            erro = e.getMessage();
+            mensagem = e.getMessage();
         }
-        return erro;
+        return mensagem;
     }
 
 }
